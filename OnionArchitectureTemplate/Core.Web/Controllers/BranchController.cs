@@ -16,17 +16,17 @@ namespace Core.Web.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var result = _ICRUDService.GetAll().ToList();
             if (result.Count == 0)
             {
-                InitBranchData();
+                await InitBranchData();
             }
             return View(result);
         }
 
-        public void InitBranchData()
+        public async Task InitBranchData()
         {
             SeedData _SeedData = new();
             var _GetCategoriesList = _SeedData.GetBranchList();
@@ -36,7 +36,7 @@ namespace Core.Web.Controllers
                 item.ModifiedDate = DateTime.Now;
                 item.CreatedBy = "Admin";
                 item.ModifiedBy = "Admin";
-				_ICRUDService.Insert(item);
+				await _ICRUDService.Insert(item);
             }
         }
     }

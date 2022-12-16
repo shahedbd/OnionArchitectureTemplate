@@ -14,12 +14,12 @@ namespace Core.Web.Controllers
 			_ICategoriesService = iCategoriesService;
 
 		}
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
 			var result = _ICategoriesService.GetAll().ToList();
 			if (result.Count == 0)
 			{
-				InitCategoriesData();
+				await InitCategoriesData();
 			}
 			return View(result.OrderByDescending(x => x.Id));
 		}
@@ -56,7 +56,7 @@ namespace Core.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public void InitCategoriesData()
+        public async Task InitCategoriesData()
 		{
 			SeedData _SeedData = new();
 			var _GetCategoriesList = _SeedData.GetCategoriesList();
@@ -66,7 +66,7 @@ namespace Core.Web.Controllers
 				item.ModifiedDate = DateTime.Now;
 				item.CreatedBy = "Admin";
 				item.ModifiedBy = "Admin";
-				_ICategoriesService.Insert(item);
+				await _ICategoriesService.Insert(item);
 			}
 		}
 	}
