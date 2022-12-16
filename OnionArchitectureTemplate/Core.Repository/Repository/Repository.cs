@@ -1,4 +1,6 @@
-﻿using Core.Entities.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Core.Entities.Models;
 using Core.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,42 +16,42 @@ namespace Core.Repository.Repository
             this.context = context;
             entities = context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
-        {
-            return entities.AsEnumerable();
-        }
+		public IEnumerable<T> GetAll()
+		{
+			return entities.AsEnumerable();
+		}
 
-        public T Get(long id)
+		public async Task<T> Get(long id)
         {
-            return entities.SingleOrDefault(x => x.Id == id);
+            return await entities.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public void Insert(T entity)
+        public async Task Insert(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
             entities.Add(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
             entities.Remove(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         public void Remove(T entity)
         {
@@ -60,9 +62,9 @@ namespace Core.Repository.Repository
             entities.Remove(entity);
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

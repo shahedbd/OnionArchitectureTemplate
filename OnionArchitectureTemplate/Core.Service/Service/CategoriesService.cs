@@ -4,7 +4,7 @@ using Core.Repository.Repository;
 namespace Core.Service.Service
 {
     public class CategoriesService : ICategoriesService
-    {
+	{
         private IRepository<Categories> _IRepository;
 
         public CategoriesService(IRepository<Categories> iRepository)
@@ -12,30 +12,30 @@ namespace Core.Service.Service
             _IRepository = iRepository;
         }
 
-        public IEnumerable<Categories> GetAll()
-        {
-            return _IRepository.GetAll();
-        }
+		public IEnumerable<Categories> GetAll()
+		{
+			return _IRepository.GetAll();
+		}
 
-        public Categories Get(long id)
-        {
-            return _IRepository.Get(id);
-        }
+		public async Task<Categories> Get(long id)
+		{
+			return await _IRepository.Get(id);
+		}
 
-        public void Insert(Categories user)
-        {
-            _IRepository.Insert(user);
-        }
-        public void Update(Categories user)
-        {
-            _IRepository.Update(user);
-        }
+		public async Task Insert(Categories entity)
+		{
+			await _IRepository.Insert(entity);
+		}
+		public async Task Update(Categories entity)
+		{
+			await _IRepository.Update(entity);
+		}
 
-        public void Delete(long id)
-        {
-            Categories _Categories = _IRepository.Get(id);
-            _IRepository.Remove(_Categories);
-            _IRepository.SaveChanges();
-        }
-    }
+		public async Task Delete(long id)
+		{
+			Categories entity = await _IRepository.Get(id);
+			_IRepository.Remove(entity);
+			await _IRepository.SaveChanges();
+		}
+	}
 }

@@ -1,15 +1,16 @@
-﻿using Core.Entities.Models;
+﻿using System.Collections.Generic;
+using Core.Entities.Models;
 
 namespace Core.Repository.Repository
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T Get(long id);
-        void Insert(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-        void Remove(T entity);
-        void SaveChanges();
+		IEnumerable<T> GetAll();
+		Task<T> Get(long id);
+		Task Insert(T entity);
+		Task Update(T entity);
+		Task Delete(T entity);
+		void Remove(T entity);
+		Task SaveChanges();
     }
 }

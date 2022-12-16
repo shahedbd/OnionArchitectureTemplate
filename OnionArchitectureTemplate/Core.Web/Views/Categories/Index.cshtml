@@ -4,16 +4,16 @@
 }
 
 <h1>Categories</h1>
-
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
 <table class="ItemTranTable">
 	<thead>
 		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.Name)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Description)
-			</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Created Date</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,9 +26,18 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.Description)
 				</td>
+				<td>
+					@String.Format("{0:f}", item.CreatedDate);
+				</td>
+				<td>
+					<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
 			</tr>
 		}
 	</tbody>
 </table>
+
+<br />
+<partial name="~/Views/Home/_bootstrapAlert.cshtml" />
 
 

@@ -16,7 +16,7 @@ builder.Services.AddTransient<IRepository<Categories>, Repository<Categories>>()
 builder.Services.AddTransient<ICategoriesService, CategoriesService>();
 
 builder.Services.AddTransient<IRepository<Branch>, Repository<Branch>>();
-builder.Services.AddTransient<IBranchService, BranchService>();
+builder.Services.AddTransient<ICRUDService<Branch>, CRUDService<Branch>>();
 
 
 var app = builder.Build();

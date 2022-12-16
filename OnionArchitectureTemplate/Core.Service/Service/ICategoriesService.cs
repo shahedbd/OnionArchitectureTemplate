@@ -4,10 +4,10 @@ namespace Core.Service.Service
 {
     public interface ICategoriesService
     {
-        IEnumerable<Categories> GetAll();
-        Categories Get(long id);
-        void Insert(Categories entity);
-        void Update(Categories entity);
-        void Delete(long id);
-    }
+		IEnumerable<Categories> GetAll();
+		Task<Categories> Get(long id);
+		Task Insert(Categories entity);
+		Task Update(Categories entity);
+		Task Delete(long id);
+	}
 }

@@ -1,0 +1,27 @@
+﻿@if (TempData["successAlert"] != null)
+{
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<p>@TempData["successAlert"]</p>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+}
+
+
+@if (TempData["errorAlert"] != null)
+{
+	<div class="alert btn-info">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+		<p>@TempData["errorAlert"]</p>
+	</div>
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		setTimeout(function () {
+			$(".alert").alert('close');
+		}, 3000);
+	});
+</script>
